@@ -8,9 +8,9 @@ on:
   release:
     types:
       - published
-env:
+#env:
 #  REGISTRY: ghcr.io
-  IMAGE_NAME: ${{ github.repository }}
+#  IMAGE_NAME: ${{ github.repository }}
 
 
 jobs:
@@ -44,7 +44,7 @@ jobs:
             type=sha,prefix=sha-
             type=ref,event=branch
             type=raw,value=latest
-          images: ${{ secrets.DOCKERHUB_USERNAME }}/${{ env.IMAGE_NAME }}
+          images: ${{ secrets.DOCKERHUB_USERNAME }}/${{ github.event.repository.name }}
         # https://github.com/docker/build-push-action
       - name: Build and push Docker image
         id: build-and-push
