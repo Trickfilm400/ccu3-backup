@@ -1,6 +1,6 @@
 FROM python:3.12-alpine3.19
 
-LABEL org.opencontainers.image.authors="Trickfiolm400 - trickfilm400@gmail.com"
+LABEL org.opencontainers.image.authors="Trickfilm400 - trickfilm400@gmail.com"
 
 WORKDIR /app
 
