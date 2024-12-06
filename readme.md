@@ -25,7 +25,6 @@ Simple docker run: `docker run --env-file .env -d --name ccu3-backup n404/ccu3-b
 
 Docker Compose Version:
 ```yaml
-version: "3.6"
 services:
   ccu3-backup:
     image: n404/ccu3-backup
@@ -42,4 +41,4 @@ services:
 - [ ] add a config for the time schedule, when to back up
 
 
-&copy; 2023 Trickfilm400
+&copy; 2023-2024 Trickfilm400
