@@ -21,6 +21,8 @@ Or simply copy the `.env.example` file to `.env` and edit the values.
 
 ## Usage
 
+The Dockerimage with the `latest` tag is available for `amd64` and `arm64`.
+
 Simple docker run: `docker run --env-file .env -d --name ccu3-backup n404/ccu3-backup`
 
 See on [DockerHub](https://hub.docker.com/r/n404/ccu3-backup).
