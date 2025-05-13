@@ -21,6 +21,10 @@ tbUsernameShow = tbUsername
 tbPassword = os.environ.get('HOMEMATIC_PASSWORD')
 HOMEMATIC_HOST = os.environ.get("HOMEMATIC_HOST")
 
+cronMonitoring_start = os.environ.get("CRON_MONITORING_URL_START")
+cronMonitoring_ok = os.environ.get("CRON_MONITORING_URL_OK")
+cronMonitoring_failed = os.environ.get("CRON_MONITORING_URL_FAILED")
+
 
 def getUserToken():
     r = requests.post(HOMEMATIC_HOST + "/login.htm",
@@ -61,14 +65,33 @@ def uploadToMinio(filename, content, content_length):
 
 
 def runSchedule():
-    print("\n\nStarting Backup Job at :: {}".format(datetime.datetime.today()))
-    print("Getting User Token")
-    sid = getUserToken()
-    print("Starting backup request with user token.")
-    backupRequest = getBackupRequest(sid)
-    filename = backupRequest.headers["Content-Disposition"].split("filename=")[1]
-    print("Uploading file to Minio")
-    uploadToMinio(filename, backupRequest.content, backupRequest.headers["Content-Length"])
-    print("Upload Done. Backup Task finished")
-    print("Ending Job at :: {}".format(datetime.datetime.today()))
-    print("\n\n")
+    try:
+        # call monitoring start
+        if cronMonitoring_start:
+            requests.get(cronMonitoring_start, verify=False)
+    except Exception as e:
+        print(e)
+    try:
+        print("\n\nStarting Backup Job at :: {}".format(datetime.datetime.today()))
+        print("Getting User Token")
+        sid = getUserToken()
+        print("Starting backup request with user token.")
+        backupRequest = getBackupRequest(sid)
+        filename = backupRequest.headers["Content-Disposition"].split("filename=")[1]
+        print("Uploading file to Minio")
+        uploadToMinio(filename, backupRequest.content, backupRequest.headers["Content-Length"])
+        print("Upload Done. Backup Task finished")
+        # call "OK" monitoring
+        if cronMonitoring_ok:
+            requests.get(cronMonitoring_ok, verify=False)
+        print("Ending Job at :: {}".format(datetime.datetime.today()))
+        print("\n\n")
+
+    except Exception as e:
+        # call error monitoring
+        if cronMonitoring_failed:
+            requests.get(cronMonitoring_failed, verify=False)
+        print(e)
+
+
+runSchedule()

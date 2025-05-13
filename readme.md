@@ -6,15 +6,18 @@ If the S3 upload fails, it will be saved into a local directory (currently the w
 
 ## Config
 
-| ENV                  | Description                                                    | Required/Default |
-|----------------------|----------------------------------------------------------------|------------------|
-| `MINIO_HOST`         | S3 Endpoint of your storage server                             | required         |
-| `MINIO_BUCKET`       | S3 Bucket to save into                                         | required         |
-| `MINIO_ACCESS_KEY`   | S3 Access Key with write permissions into the given bucket     | required         |
-| `MINIO_SECRET_KEY`   | S3 Secret key correspoding to the access key                   | required         |
-| `HOMEMATIC_USERNAME` | Homematic User with backup permission (probably an Admin user) | required         |
-| `HOMEMATIC_PASSWORD` | corresponding password                                         | required         |
-| `HOMEMATIC_HOST`     | URL / Host to access the CCU Device                            | required         |
+| ENV                          | Description                                                    | Required/Default |
+|------------------------------|----------------------------------------------------------------|------------------|
+| `MINIO_HOST`                 | S3 Endpoint of your storage server                             | required         |
+| `MINIO_BUCKET`               | S3 Bucket to save into                                         | required         |
+| `MINIO_ACCESS_KEY`           | S3 Access Key with write permissions into the given bucket     | required         |
+| `MINIO_SECRET_KEY`           | S3 Secret key corresponding to the access key                  | required         |
+| `HOMEMATIC_USERNAME`         | Homematic User with backup permission (probably an Admin user) | required         |
+| `HOMEMATIC_PASSWORD`         | corresponding password                                         | required         |
+| `HOMEMATIC_HOST`             | URL / Host to access the CCU Device                            | required         |
+| `CRON_MONITORING_URL_START`  | URL which will be called upon job start (format: `http://...`) | optional         |
+| `CRON_MONITORING_URL_OK`     | URL which will be called upon job (format: `http://...`)       | optional         |
+| `CRON_MONITORING_URL_FAILED` | URL which will be called upon job error (format: `http://...`) | optional         |
 
 
 Or simply copy the `.env.example` file to `.env` and edit the values.
@@ -43,6 +46,6 @@ services:
 - [ ] add an env variable for disabling S3 and use local storage by default
 - [ ] add a useful logging library for displaying better time data in console logs
 - [ ] add a config for the time schedule, when to back up
+- [ ] Update packages with `== -> >=` and `pip install --upgrade -r requirements.txt` and `pip freeze > requirements.txt`
 
-
-&copy; 2023-2024 Trickfilm400
+&copy; 2023-2025 Trickfilm400
