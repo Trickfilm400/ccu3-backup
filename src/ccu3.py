@@ -90,8 +90,6 @@ def runSchedule():
     except Exception as e:
         # call error monitoring
         if cronMonitoring_failed:
+            print("Calling FAILED monitoring")
             requests.get(cronMonitoring_failed, verify=False)
         print(e)
-
-
-runSchedule()

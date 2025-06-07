@@ -6,18 +6,19 @@ If the S3 upload fails, it will be saved into a local directory (currently the w
 
 ## Config
 
-| ENV                          | Description                                                    | Required/Default |
-|------------------------------|----------------------------------------------------------------|------------------|
-| `MINIO_HOST`                 | S3 Endpoint of your storage server                             | required         |
-| `MINIO_BUCKET`               | S3 Bucket to save into                                         | required         |
-| `MINIO_ACCESS_KEY`           | S3 Access Key with write permissions into the given bucket     | required         |
-| `MINIO_SECRET_KEY`           | S3 Secret key corresponding to the access key                  | required         |
-| `HOMEMATIC_USERNAME`         | Homematic User with backup permission (probably an Admin user) | required         |
-| `HOMEMATIC_PASSWORD`         | corresponding password                                         | required         |
-| `HOMEMATIC_HOST`             | URL / Host to access the CCU Device                            | required         |
-| `CRON_MONITORING_URL_START`  | URL which will be called upon job start (format: `http://...`) | optional         |
-| `CRON_MONITORING_URL_OK`     | URL which will be called upon job (format: `http://...`)       | optional         |
-| `CRON_MONITORING_URL_FAILED` | URL which will be called upon job error (format: `http://...`) | optional         |
+| ENV                          | Description                                                              | Required/Default |
+|------------------------------|--------------------------------------------------------------------------|------------------|
+| `MINIO_HOST`                 | S3 Endpoint of your storage server                                       | required         |
+| `MINIO_BUCKET`               | S3 Bucket to save into                                                   | required         |
+| `MINIO_ACCESS_KEY`           | S3 Access Key with write permissions into the given bucket               | required         |
+| `MINIO_SECRET_KEY`           | S3 Secret key corresponding to the access key                            | required         |
+| `HOMEMATIC_USERNAME`         | Homematic User with backup permission (probably an Admin user)           | required         |
+| `HOMEMATIC_PASSWORD`         | corresponding password                                                   | required         |
+| `HOMEMATIC_HOST`             | URL / Host to access the CCU Device                                      | required         |
+| `CRON_MONITORING_URL_START`  | URL which will be called upon job start (format: `http://...`)           | optional         |
+| `CRON_MONITORING_URL_OK`     | URL which will be called upon job (format: `http://...`)                 | optional         |
+| `CRON_MONITORING_URL_FAILED` | URL which will be called upon job error (format: `http://...`)           | optional         |
+| `RUN_ONCE`                   | `true` if no schedule should be used. running one and then exits process | optional         |
 
 
 Or simply copy the `.env.example` file to `.env` and edit the values.
@@ -40,6 +41,11 @@ services:
     env_file:
       - .env
 ```
+
+### external schedule
+
+If you want to use an external schedule like crontab / kubernetes jobs, set the environment variable `RUN_ONCE` to `true`.
+The process will execute the backup and then stop.
 
 ### Todo (Contributions are welcome)
 - [ ] todo: before start: check for all necessary env variables (username hostname access token etc.)
