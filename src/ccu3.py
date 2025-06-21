@@ -33,11 +33,20 @@ def getUserToken():
                       allow_redirects=False)
     # print(r.text)
     # print(r.headers["Location"])
+    if r.status_code != 302:
+        print('Status Code: ' + str(r.status_code))
+        #raise Exception("Failed to get user token.")
     url = r.headers["Location"]
     parsed_url = urlparse(url)
-    captured_value = parse_qs(parsed_url.query)['sid'][0]
+    q = parse_qs(parsed_url.query)
+    if 'error' in q:
+        raise Exception('Error while logging in. Wrong credentials?')
+    elif 'sid' in q:
+        captured_value = q['sid'][0]
     # print(captured_value)
-    return captured_value
+        return captured_value
+    else:
+        raise Exception('Error while logging in. (No Error and no sid).')
 
 
 def getBackupRequest(sid):
