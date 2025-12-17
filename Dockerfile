@@ -1,4 +1,4 @@
-FROM python:3.13-alpine3.21
+FROM python:3.14-alpine3.23
 
 LABEL org.opencontainers.image.authors="Trickfilm400 - trickfilm400@gmail.com"
 
