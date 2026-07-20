@@ -54,4 +54,4 @@ The process will execute the backup and then stop.
 - [ ] add a config for the time schedule, when to back up
 - [ ] Update packages with `== -> >=` and `pip install --upgrade -r requirements.txt` and `pip freeze > requirements.txt`
 
-&copy; 2023-2025 Trickfilm400
+&copy; 2023-2026 Trickfilm400
