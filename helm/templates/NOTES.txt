@@ -1,0 +1,3 @@
+The name of the stack is the following
+
+{{ include "ccu3-backup.fullname" . }}

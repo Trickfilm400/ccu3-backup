@@ -1,0 +1,22 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: {{ include "ccu3-backup.fullname" . }}
+  labels:
+    {{- include "ccu3-backup.labels" . | nindent 4 }}
+spec:
+  schedule: {{ .Values.schedule }}
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: ccu3-backup
+              image: n404/ccu3-backup:latest
+              imagePullPolicy: Always
+              envFrom:
+                - configMapRef:
+                    name: {{ include "ccu3-backup.fullname" . }}
+                - secretRef:
+                    name: {{ include "ccu3-backup.fullname" . }}
+          restartPolicy: OnFailure

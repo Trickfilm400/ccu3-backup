@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "ccu3-backup.fullname" . }}
+  labels:
+    {{- include "ccu3-backup.labels" . | nindent 4 }}
+data:
+  MINIO_HOST: {{ .Values.minioHost | quote }}
+  MINIO_BUCKET: {{ .Values.minioBucket | quote }}
+  HOMEMATIC_HOST: {{ .Values.homematicHost | quote }}
+  CRON_MONITORING_URL_START: {{ .Values.monitoring_url_start | quote }}
+  CRON_MONITORING_URL_OK: {{ .Values.monitoring_url_ok | quote }}
+  CRON_MONITORING_URL_FAILED: {{ .Values.monitoring_url_failed | quote }}
+  RUN_ONCE: "true"

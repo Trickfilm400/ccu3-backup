@@ -1,0 +1,18 @@
+# Default values for ccu3-backup.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+minioHost: ""
+minioBucket: ""
+minioAccessKey: ""
+minioAccessSecret: ""
+
+schedule: ""
+
+homematicHost: ""
+homematicUsername: ""
+homematicPassword: ""
+
+monitoring_url_start: ""
+monitoring_url_ok: ""
+monitoring_url_failed: ""
